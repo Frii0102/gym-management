@@ -1,0 +1,29 @@
+<h2>Записи на тренування</h2>
+<table>
+    <tr><th>ID</th><th>Користувач</th><th>Тренування</th><th>Дата запису</th><th>Статус</th></tr>
+    {{#each bookings}}
+        <tr>
+            <td>{{booking_id}}</td>
+            <td>{{user_name}}</td>
+            <td>{{training_title}}</td>
+            <td>{{booked_at}}</td>
+            <td>{{status}}</td>
+        </tr>
+    {{/each}}
+</table>
+<h3>Записатися на тренування</h3>
+<form method="POST" action="/bookings">
+    <select name="user_id" required>
+        <option value="">Оберіть користувача</option>
+        {{#each users}}
+            <option value="{{user_id}}">{{full_name}}</option>
+        {{/each}}
+    </select>
+    <select name="training_id" required>
+        <option value="">Оберіть тренування</option>
+        {{#each trainings}}
+            <option value="{{training_id}}">{{title}}</option>
+        {{/each}}
+    </select>
+    <button type="submit">Записатися</button>
+</form>

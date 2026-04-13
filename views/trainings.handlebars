@@ -1,0 +1,36 @@
+<h2>Тренування</h2>
+<table>
+    <tr><th>ID</th><th>Назва</th><th>Тренер</th><th>Локація</th><th>Початок</th><th>Тривалість</th><th>Місць</th></tr>
+    {{#each trainings}}
+        <tr>
+            <td>{{training_id}}</td>
+            <td>{{title}}</td>
+            <td>{{trainer_name}}</td>
+            <td>{{location_name}}</td>
+            <td>{{start_time}}</td>
+            <td>{{duration_min}} хв</td>
+            <td>{{capacity}}</td>
+        </tr>
+    {{/each}}
+</table>
+<h3>Додати тренування</h3>
+<form method="POST" action="/trainings">
+    <input name="title" placeholder="Назва тренування" required>
+    <select name="trainer_id" required>
+        <option value="">Оберіть тренера</option>
+        {{#each trainers}}
+            <option value="{{trainer_id}}">{{full_name}}</option>
+        {{/each}}
+    </select>
+    <select name="location_id" required>
+        <option value="">Оберіть локацію</option>
+        {{#each locations}}
+            <option value="{{location_id}}">{{name}}</option>
+        {{/each}}
+    </select>
+    <input name="created_by" placeholder="ID адміна" required>
+    <input name="start_time" type="datetime-local" required>
+    <input name="duration_min" type="number" placeholder="Тривалість (хв)" required>
+    <input name="capacity" type="number" placeholder="Кількість місць" required>
+    <button type="submit">Додати</button>
+</form>

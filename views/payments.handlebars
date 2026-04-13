@@ -1,0 +1,21 @@
+<h2>Оплати</h2>
+<table>
+    <tr><th>ID</th><th>Користувач</th><th>Абонемент</th><th>Сума</th><th>Статус</th><th>Дата</th></tr>
+    {{#each payments}}
+        <tr>
+            <td>{{payment_id}}</td>
+            <td>{{user_name}}</td>
+            <td>{{subscription_type}}</td>
+            <td>{{amount}}</td>
+            <td>{{status}}</td>
+            <td>{{paid_at}}</td>
+        </tr>
+    {{/each}}
+</table>
+<h3>Додати оплату</h3>
+<form method="POST" action="/payments">
+    <input name="subscription_id" placeholder="ID абонементу" required>
+    <input name="amount" placeholder="Сума" required>
+    <input name="status" placeholder="Статус (pending/paid)" value="pending">
+    <button type="submit">Додати</button>
+</form>

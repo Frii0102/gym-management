@@ -1,0 +1,21 @@
+<h2>Відгуки</h2>
+<table>
+    <tr><th>ID</th><th>Користувач</th><th>Тренування</th><th>Рейтинг</th><th>Коментар</th></tr>
+    {{#each reviews}}
+        <tr>
+            <td>{{review_id}}</td>
+            <td>{{user_name}}</td>
+            <td>{{training_title}}</td>
+            <td>{{rating}}/5</td>
+            <td>{{comment}}</td>
+        </tr>
+    {{/each}}
+</table>
+<h3>Залишити відгук</h3>
+<form method="POST" action="/reviews">
+    <input name="user_id" placeholder="ID користувача" required>
+    <input name="training_id" placeholder="ID тренування" required>
+    <input name="rating" type="number" min="1" max="5" placeholder="Рейтинг (1-5)" required>
+    <input name="comment" placeholder="Коментар">
+    <button type="submit">Додати</button>
+</form>

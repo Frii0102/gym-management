@@ -1,0 +1,19 @@
+<h2>Локації</h2>
+<table>
+    <tr><th>ID</th><th>Назва</th><th>Адреса</th><th>Місто</th></tr>
+    {{#each locations}}
+        <tr>
+            <td>{{location_id}}</td>
+            <td>{{name}}</td>
+            <td>{{address}}</td>
+            <td>{{city}}</td>
+        </tr>
+    {{/each}}
+</table>
+<h3>Додати локацію</h3>
+<form method="POST" action="/locations">
+    <input name="name" placeholder="Назва" required>
+    <input name="address" placeholder="Адреса">
+    <input name="city" placeholder="Місто">
+    <button type="submit">Додати</button>
+</form>

@@ -1,0 +1,22 @@
+<h2>Користувачі</h2>
+<table>
+    <tr><th>ID</th><th>Ім'я</th><th>Email</th><th>Телефон</th><th>Роль</th></tr>
+    {{#each users}}
+        <tr>
+            <td>{{user_id}}</td>
+            <td>{{full_name}}</td>
+            <td>{{email}}</td>
+            <td>{{phone}}</td>
+            <td>{{role}}</td>
+        </tr>
+    {{/each}}
+</table>
+<h3>Додати користувача</h3>
+<form method="POST" action="/users">
+    <input name="full_name" placeholder="Ім'я" required>
+    <input name="email" placeholder="Email" required>
+    <input name="password_hash" placeholder="Пароль" required>
+    <input name="phone" placeholder="Телефон">
+    <input name="role" placeholder="Роль (client/admin)" value="client">
+    <button type="submit">Додати</button>
+</form>

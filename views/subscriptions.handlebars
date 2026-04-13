@@ -1,0 +1,21 @@
+<h2>Абонементи</h2>
+<table>
+    <tr><th>ID</th><th>Користувач</th><th>Тип</th><th>Початок</th><th>Кінець</th></tr>
+    {{#each subscriptions}}
+        <tr>
+            <td>{{subscription_id}}</td>
+            <td>{{user_name}}</td>
+            <td>{{type}}</td>
+            <td>{{start_date}}</td>
+            <td>{{end_date}}</td>
+        </tr>
+    {{/each}}
+</table>
+<h3>Додати абонемент</h3>
+<form method="POST" action="/subscriptions">
+    <input name="user_id" placeholder="ID користувача" required>
+    <input name="type" placeholder="Тип (monthly/annual)" required>
+    <input name="start_date" type="date" required>
+    <input name="end_date" type="date" required>
+    <button type="submit">Додати</button>
+</form>
