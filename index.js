@@ -55,6 +55,7 @@ app.post('/locations', locationsController.create)
 
 app.get('/subscriptions', subscriptionsController.getAll)
 app.post('/subscriptions', subscriptionsController.create)
+app.get('/subscriptions/chart', subscriptionsController.chartByType)
 
 app.get('/payments', paymentsController.getAll)
 app.post('/payments', paymentsController.create)
