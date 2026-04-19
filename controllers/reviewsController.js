@@ -1,13 +1,20 @@
 const pool = require('../db')
 
 const getAll = async (req, res) => {
-    const result = await pool.query(`
+    const reviews = await pool.query(`
     SELECT r.*, u.full_name AS user_name, t.title AS training_title
     FROM reviews r
     JOIN users u ON r.user_id = u.user_id
     JOIN trainings t ON r.training_id = t.training_id
   `)
-    res.render('reviews', { reviews: result.rows })
+    const users = await pool.query('SELECT * FROM users')
+    const trainings = await pool.query('SELECT * FROM trainings')
+
+    res.render('reviews', {
+        reviews: reviews.rows,
+        users: users.rows,
+        trainings: trainings.rows
+    })
 }
 
 const create = async (req, res) => {

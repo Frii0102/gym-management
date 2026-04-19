@@ -1,6 +1,9 @@
 <h2>Локації</h2>
-<table>
+<table class="table table-striped table-bordered">
+    <thead>
     <tr><th>ID</th><th>Назва</th><th>Адреса</th><th>Місто</th></tr>
+    </thead>
+    <tbody>
     {{#each locations}}
         <tr>
             <td>{{location_id}}</td>
@@ -9,6 +12,7 @@
             <td>{{city}}</td>
         </tr>
     {{/each}}
+    </tbody>
 </table>
 <h3>Додати локацію</h3>
 <form method="POST" action="/locations">

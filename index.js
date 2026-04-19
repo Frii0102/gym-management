@@ -14,7 +14,22 @@ const reviewsController = require('./controllers/reviewsController')
 
 const app = express()
 
-app.engine('handlebars', engine())
+app.engine('handlebars', engine({
+    defaultLayout: 'main',
+    helpers: {
+        formatDate: (date) => {
+            if (!date) return ''
+            return new Date(date).toLocaleString('uk-UA', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })
+        }
+    }
+}))
+
 app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname, 'views'))
 

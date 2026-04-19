@@ -1,15 +1,19 @@
 <h2>Абонементи</h2>
-<table>
+<table class="table table-striped table-bordered">
+    <thead>
     <tr><th>ID</th><th>Користувач</th><th>Тип</th><th>Початок</th><th>Кінець</th></tr>
+    </thead>
+    <tbody>
     {{#each subscriptions}}
         <tr>
             <td>{{subscription_id}}</td>
             <td>{{user_name}}</td>
             <td>{{type}}</td>
-            <td>{{start_date}}</td>
-            <td>{{end_date}}</td>
+            <td>{{formatDate start_date}}</td>
+            <td>{{formatDate end_date}}</td>
         </tr>
     {{/each}}
+    </tbody>
 </table>
 <h3>Додати абонемент</h3>
 <form method="POST" action="/subscriptions">

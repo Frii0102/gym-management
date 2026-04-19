@@ -1,6 +1,9 @@
 <h2>Оплати</h2>
-<table>
+<table class="table table-striped table-bordered">
+    <thead>
     <tr><th>ID</th><th>Користувач</th><th>Абонемент</th><th>Сума</th><th>Статус</th><th>Дата</th></tr>
+    </thead>
+    <tbody>
     {{#each payments}}
         <tr>
             <td>{{payment_id}}</td>
@@ -8,9 +11,10 @@
             <td>{{subscription_type}}</td>
             <td>{{amount}}</td>
             <td>{{status}}</td>
-            <td>{{paid_at}}</td>
+            <td>{{formatDate paid_at}}</td>
         </tr>
     {{/each}}
+    </tbody>
 </table>
 <h3>Додати оплату</h3>
 <form method="POST" action="/payments">

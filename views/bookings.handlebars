@@ -1,15 +1,19 @@
 <h2>Записи на тренування</h2>
-<table>
+<table class="table table-striped table-bordered">
+    <thead>
     <tr><th>ID</th><th>Користувач</th><th>Тренування</th><th>Дата запису</th><th>Статус</th></tr>
+    </thead>
+    <tbody>
     {{#each bookings}}
         <tr>
             <td>{{booking_id}}</td>
             <td>{{user_name}}</td>
             <td>{{training_title}}</td>
-            <td>{{booked_at}}</td>
+            <td>{{formatDate booked_at}}</td>
             <td>{{status}}</td>
         </tr>
     {{/each}}
+    </tbody>
 </table>
 <h3>Записатися на тренування</h3>
 <form method="POST" action="/bookings">

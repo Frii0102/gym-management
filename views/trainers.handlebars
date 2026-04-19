@@ -1,6 +1,9 @@
 <h2>Тренери</h2>
-<table>
+<table class="table table-striped table-bordered">
+    <thead>
     <tr><th>ID</th><th>Ім'я</th><th>Спеціалізація</th><th>Біо</th></tr>
+    </thead>
+    <tbody>
     {{#each trainers}}
         <tr>
             <td>{{trainer_id}}</td>
@@ -9,6 +12,7 @@
             <td>{{bio}}</td>
         </tr>
     {{/each}}
+    </tbody>
 </table>
 <h3>Додати тренера</h3>
 <form method="POST" action="/trainers">

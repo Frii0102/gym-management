@@ -1,6 +1,9 @@
 <h2>Відгуки</h2>
-<table>
+<table class="table table-striped table-bordered">
+    <thead>
     <tr><th>ID</th><th>Користувач</th><th>Тренування</th><th>Рейтинг</th><th>Коментар</th></tr>
+    </thead>
+    <tbody>
     {{#each reviews}}
         <tr>
             <td>{{review_id}}</td>
@@ -10,11 +13,22 @@
             <td>{{comment}}</td>
         </tr>
     {{/each}}
+    </tbody>
 </table>
 <h3>Залишити відгук</h3>
 <form method="POST" action="/reviews">
-    <input name="user_id" placeholder="ID користувача" required>
-    <input name="training_id" placeholder="ID тренування" required>
+    <select name="user_id" required>
+        <option value="">Оберіть користувача</option>
+        {{#each users}}
+            <option value="{{user_id}}">{{full_name}}</option>
+        {{/each}}
+    </select>
+    <select name="training_id" required>
+        <option value="">Оберіть тренування</option>
+        {{#each trainings}}
+            <option value="{{training_id}}">{{title}}</option>
+        {{/each}}
+    </select>
     <input name="rating" type="number" min="1" max="5" placeholder="Рейтинг (1-5)" required>
     <input name="comment" placeholder="Коментар">
     <button type="submit">Додати</button>

@@ -1,17 +1,21 @@
 <h2>Тренування</h2>
-<table>
+<table class="table table-striped table-bordered">
+    <thead>
     <tr><th>ID</th><th>Назва</th><th>Тренер</th><th>Локація</th><th>Початок</th><th>Тривалість</th><th>Місць</th></tr>
+    </thead>
+    <tbody>
     {{#each trainings}}
         <tr>
             <td>{{training_id}}</td>
             <td>{{title}}</td>
             <td>{{trainer_name}}</td>
             <td>{{location_name}}</td>
-            <td>{{start_time}}</td>
+            <td>{{formatDate start_time}}</td>
             <td>{{duration_min}} хв</td>
             <td>{{capacity}}</td>
         </tr>
     {{/each}}
+    </tbody>
 </table>
 <h3>Додати тренування</h3>
 <form method="POST" action="/trainings">
