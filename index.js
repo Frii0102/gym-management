@@ -1,3 +1,4 @@
+const multer = require('multer')
 const express = require('express')
 const { engine } = require('express-handlebars')
 const path = require('path')
@@ -13,6 +14,7 @@ const paymentsController = require('./controllers/paymentsController')
 const reviewsController = require('./controllers/reviewsController')
 
 const app = express()
+const upload = multer({ storage: multer.memoryStorage() })
 
 app.engine('handlebars', engine({
     defaultLayout: 'main',
@@ -56,6 +58,8 @@ app.post('/locations', locationsController.create)
 app.get('/subscriptions', subscriptionsController.getAll)
 app.post('/subscriptions', subscriptionsController.create)
 app.get('/subscriptions/chart', subscriptionsController.chartByType)
+app.get('/subscriptions/export', subscriptionsController.exportExcel)
+app.post('/subscriptions/import', upload.single('excelFile'), subscriptionsController.importExcel)
 
 app.get('/payments', paymentsController.getAll)
 app.post('/payments', paymentsController.create)
