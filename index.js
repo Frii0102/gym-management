@@ -1,7 +1,8 @@
-const multer = require('multer')
 const express = require('express')
 const { engine } = require('express-handlebars')
 const path = require('path')
+const session = require('express-session')
+const multer = require('multer')
 require('dotenv').config()
 
 const usersController = require('./controllers/usersController')
@@ -12,6 +13,9 @@ const locationsController = require('./controllers/locationsController')
 const subscriptionsController = require('./controllers/subscriptionsController')
 const paymentsController = require('./controllers/paymentsController')
 const reviewsController = require('./controllers/reviewsController')
+const authController = require('./controllers/authController')
+
+const { isAuthenticated, isAdmin } = require('./middleware/authMiddleware')
 
 const app = express()
 const upload = multer({ storage: multer.memoryStorage() })
@@ -28,6 +32,9 @@ app.engine('handlebars', engine({
                 hour: '2-digit',
                 minute: '2-digit'
             })
+        },
+        isAdmin: (user) => {
+            return user && user.role === 'admin'
         }
     }
 }))
@@ -38,34 +45,49 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/', (req, res) => res.render('index'))
+app.use(session({
+    secret: 'gym-secret-key',
+    resave: false,
+    saveUninitialized: false
+}))
 
-app.get('/users', usersController.getAll)
-app.post('/users', usersController.create)
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null
+    next()
+})
 
-app.get('/trainers', trainersController.getAll)
-app.post('/trainers', trainersController.create)
+app.get('/login', authController.showLogin)
+app.post('/login', authController.login)
+app.get('/logout', authController.logout)
 
-app.get('/trainings', trainingsController.getAll)
-app.post('/trainings', trainingsController.create)
+app.get('/', isAuthenticated, (req, res) => res.render('index'))
 
-app.get('/bookings', bookingsController.getAll)
-app.post('/bookings', bookingsController.create)
+app.get('/users', isAuthenticated, isAdmin, usersController.getAll)
+app.post('/users', isAuthenticated, isAdmin, usersController.create)
 
-app.get('/locations', locationsController.getAll)
-app.post('/locations', locationsController.create)
+app.get('/trainers', isAuthenticated, trainersController.getAll)
+app.post('/trainers', isAuthenticated, isAdmin, trainersController.create)
 
-app.get('/subscriptions', subscriptionsController.getAll)
-app.post('/subscriptions', subscriptionsController.create)
-app.get('/subscriptions/chart', subscriptionsController.chartByType)
-app.get('/subscriptions/export', subscriptionsController.exportExcel)
-app.post('/subscriptions/import', upload.single('excelFile'), subscriptionsController.importExcel)
+app.get('/locations', isAuthenticated, locationsController.getAll)
+app.post('/locations', isAuthenticated, isAdmin, locationsController.create)
 
-app.get('/payments', paymentsController.getAll)
-app.post('/payments', paymentsController.create)
+app.get('/trainings', isAuthenticated, trainingsController.getAll)
+app.post('/trainings', isAuthenticated, isAdmin, trainingsController.create)
 
-app.get('/reviews', reviewsController.getAll)
-app.post('/reviews', reviewsController.create)
+app.get('/bookings', isAuthenticated, isAdmin, bookingsController.getAll)
+app.post('/bookings', isAuthenticated, isAdmin, bookingsController.create)
+
+app.get('/subscriptions', isAuthenticated, isAdmin, subscriptionsController.getAll)
+app.post('/subscriptions', isAuthenticated, isAdmin, subscriptionsController.create)
+app.get('/subscriptions/chart', isAuthenticated, isAdmin, subscriptionsController.chartByType)
+app.get('/subscriptions/export', isAuthenticated, isAdmin, subscriptionsController.exportExcel)
+app.post('/subscriptions/import', isAuthenticated, isAdmin, upload.single('excelFile'), subscriptionsController.importExcel)
+
+app.get('/payments', isAuthenticated, isAdmin, paymentsController.getAll)
+app.post('/payments', isAuthenticated, isAdmin, paymentsController.create)
+
+app.get('/reviews', isAuthenticated, reviewsController.getAll)
+app.post('/reviews', isAuthenticated, reviewsController.create)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`)

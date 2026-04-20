@@ -1,87 +1,96 @@
-<div class="row mt-4">
-    <div class="col-12 text-center mb-5">
-        <h1 class="display-4 fw-bold">💪 Система управління спортзалом</h1>
-        <p class="lead text-muted">Управляйте тренуваннями, абонементами та клієнтами</p>
-    </div>
+<div class="text-center mb-5">
+    <h1 class="display-3 fw-bold">💪 Система управління спортзалом</h1>
+    <p class="lead text-muted">Управляйте тренуваннями, абонементами та клієнтами</p>
 </div>
 
 <div class="row g-4">
-    <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body text-center p-4">
-                <h2>👥</h2>
-                <h5 class="card-title">Користувачі</h5>
-                <p class="card-text text-muted">Керуйте клієнтами та адміністраторами</p>
-                <a href="/users" class="btn btn-success">Переглянути</a>
+    {{#if (isAdmin user)}}
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="fs-1 mb-3">👥</div>
+                <h3>Користувачі</h3>
+                <p class="text-muted">Керуйте клієнтами та адміністраторами</p>
+                <div class="mt-auto">
+                    <a href="/users" class="btn btn-success">Переглянути</a>
+                </div>
             </div>
         </div>
-    </div>
+    {{/if}}
+
     <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body text-center p-4">
-                <h2>🏋️</h2>
-                <h5 class="card-title">Тренери</h5>
-                <p class="card-text text-muted">Список тренерів та їх спеціалізації</p>
+        <div class="card h-100 text-center p-4">
+            <div class="fs-1 mb-3">🏋️</div>
+            <h3>Тренери</h3>
+            <p class="text-muted">Список тренерів та їх спеціалізацій</p>
+            <div class="mt-auto">
                 <a href="/trainers" class="btn btn-success">Переглянути</a>
             </div>
         </div>
     </div>
+
     <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body text-center p-4">
-                <h2>📍</h2>
-                <h5 class="card-title">Локації</h5>
-                <p class="card-text text-muted">Зали та майданчики для тренувань</p>
+        <div class="card h-100 text-center p-4">
+            <div class="fs-1 mb-3">📍</div>
+            <h3>Локації</h3>
+            <p class="text-muted">Зали та майданчики для тренувань</p>
+            <div class="mt-auto">
                 <a href="/locations" class="btn btn-success">Переглянути</a>
             </div>
         </div>
     </div>
+
     <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body text-center p-4">
-                <h2>📅</h2>
-                <h5 class="card-title">Тренування</h5>
-                <p class="card-text text-muted">Розклад та управління тренуваннями</p>
+        <div class="card h-100 text-center p-4">
+            <div class="fs-1 mb-3">📅</div>
+            <h3>Тренування</h3>
+            <p class="text-muted">Розклад та управління тренуваннями</p>
+            <div class="mt-auto">
                 <a href="/trainings" class="btn btn-success">Переглянути</a>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body text-center p-4">
-                <h2>📋</h2>
-                <h5 class="card-title">Записи</h5>
-                <p class="card-text text-muted">Записи клієнтів на тренування</p>
-                <a href="/bookings" class="btn btn-success">Переглянути</a>
+
+    {{#if (isAdmin user)}}
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="fs-1 mb-3">📋</div>
+                <h3>Записи</h3>
+                <p class="text-muted">Записи клієнтів на тренування</p>
+                <div class="mt-auto">
+                    <a href="/bookings" class="btn btn-success">Переглянути</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body text-center p-4">
-                <h2>🎫</h2>
-                <h5 class="card-title">Абонементи</h5>
-                <p class="card-text text-muted">Управління абонементами клієнтів</p>
-                <a href="/subscriptions" class="btn btn-success">Переглянути</a>
+
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="fs-1 mb-3">🎟️</div>
+                <h3>Абонементи</h3>
+                <p class="text-muted">Управління абонементами клієнтів</p>
+                <div class="mt-auto">
+                    <a href="/subscriptions" class="btn btn-success">Переглянути</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body text-center p-4">
-                <h2>💳</h2>
-                <h5 class="card-title">Оплати</h5>
-                <p class="card-text text-muted">Історія та статус оплат</p>
-                <a href="/payments" class="btn btn-success">Переглянути</a>
+
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="fs-1 mb-3">💳</div>
+                <h3>Оплати</h3>
+                <p class="text-muted">Перегляд та облік оплат</p>
+                <div class="mt-auto">
+                    <a href="/payments" class="btn btn-success">Переглянути</a>
+                </div>
             </div>
         </div>
-    </div>
+    {{/if}}
+
     <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body text-center p-4">
-                <h2>⭐</h2>
-                <h5 class="card-title">Відгуки</h5>
-                <p class="card-text text-muted">Відгуки клієнтів про тренування</p>
+        <div class="card h-100 text-center p-4">
+            <div class="fs-1 mb-3">⭐</div>
+            <h3>Відгуки</h3>
+            <p class="text-muted">Оцінки та коментарі клієнтів</p>
+            <div class="mt-auto">
                 <a href="/reviews" class="btn btn-success">Переглянути</a>
             </div>
         </div>

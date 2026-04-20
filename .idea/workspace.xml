@@ -12,6 +12,13 @@
       <entry key="_/Users/venchak_ilona/WebstormProjects/gym-management" value="3CGVuCxJyPIWUtIb0wfAG22lggt" />
     </persistenceIdMap>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -55,7 +62,7 @@
       <option name="presentableId" value="Default" />
       <updated>1773944237746</updated>
       <workItem from="1773944238777" duration="1092000" />
-      <workItem from="1776012114608" duration="17342000" />
+      <workItem from="1776012114608" duration="20395000" />
     </task>
     <servers />
   </component>

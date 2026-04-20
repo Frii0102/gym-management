@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-center align-items-center" style="min-height: 75vh;">
+    <div class="card p-4" style="width: 100%; max-width: 430px;">
+        <h2 class="text-center mb-4">Вхід у систему</h2>
+
+        {{#if error}}
+            <div class="alert alert-danger" role="alert">
+                {{error}}
+            </div>
+        {{/if}}
+
+        <form method="POST" action="/login" style="max-width: none; background: none; padding: 0; box-shadow: none;">
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Введіть email" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Пароль</label>
+                <input type="password" name="password" class="form-control" placeholder="Введіть пароль" required>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">Увійти</button>
+        </form>
+    </div>
+</div>
