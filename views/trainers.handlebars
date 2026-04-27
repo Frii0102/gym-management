@@ -1,24 +1,54 @@
 <h2>Тренери</h2>
-<table class="table table-striped table-bordered">
-    <thead>
-    <tr><th>ID</th><th>Ім'я</th><th>Спеціалізація</th><th>Біо</th></tr>
-    </thead>
-    <tbody>
-    {{#each trainers}}
+
+<div class="card p-4 mb-4">
+    <h3 class="mb-3" style="margin-top: 0;">Список тренерів</h3>
+
+    <table class="table table-striped table-bordered mb-0">
+        <thead>
         <tr>
-            <td>{{trainer_id}}</td>
-            <td>{{full_name}}</td>
-            <td>{{specialization}}</td>
-            <td>{{bio}}</td>
+            <th>Ім'я</th>
+            <th>Спеціалізація</th>
+            <th>Біо</th>
         </tr>
-    {{/each}}
-    </tbody>
-</table>
-<h3>Додати тренера</h3>
-<form method="POST" action="/trainers">
-    <input name="full_name" placeholder="Ім'я" required>
-    <input name="specialization" placeholder="Спеціалізація">
-    <input name="bio" placeholder="Біо">
-    <input name="photo_url" placeholder="URL фото">
-    <button type="submit">Додати</button>
-</form>
+        </thead>
+        <tbody>
+        {{#each trainers}}
+            <tr>
+                <td>{{full_name}}</td>
+                <td>{{specialization}}</td>
+                <td>{{bio}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{#if (isAdmin user)}}
+    <div class="card p-4">
+        <h3 class="mb-3" style="margin-top: 0;">Додати тренера</h3>
+
+        <form method="POST" action="/trainers" style="max-width: none; background: none; box-shadow: none; padding: 0; margin: 0;">
+            <div class="mb-3">
+                <label class="form-label">Ім'я</label>
+                <input name="full_name" class="form-control" placeholder="Ім'я тренера" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Спеціалізація</label>
+                <input name="specialization" class="form-control" placeholder="Спеціалізація" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Біо</label>
+                <input name="bio" class="form-control" placeholder="Короткий опис">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">URL фото</label>
+                <input name="photo_url" class="form-control" placeholder="Посилання на фото">
+            </div>
+
+            <button type="submit" class="btn btn-success">Додати тренера</button>
+        </form>
+    </div>
+{{/if}}

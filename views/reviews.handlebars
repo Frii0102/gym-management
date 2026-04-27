@@ -1,35 +1,71 @@
 <h2>Відгуки</h2>
-<table class="table table-striped table-bordered">
-    <thead>
-    <tr><th>ID</th><th>Користувач</th><th>Тренування</th><th>Рейтинг</th><th>Коментар</th></tr>
-    </thead>
-    <tbody>
-    {{#each reviews}}
+
+<div class="card p-4 mb-4" style="max-width: 950px;">
+    <h3 class="mb-3" style="margin-top: 0;">Залишити відгук</h3>
+
+    <form method="POST" action="/reviews" style="max-width: none; background: none; box-shadow: none; padding: 0; margin: 0;">
+        {{#if isAdminUser}}
+            <div class="mb-3">
+                <label class="form-label">Користувач</label>
+                <select name="user_id" class="form-control" required>
+                    <option value="">Оберіть користувача</option>
+                    {{#each users}}
+                        <option value="{{user_id}}">{{full_name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        {{else}}
+            <div class="mb-3">
+                <label class="form-label">Користувач</label>
+                <input type="text" class="form-control" value="{{user.full_name}}" disabled>
+            </div>
+        {{/if}}
+
+        <div class="mb-3">
+            <label class="form-label">Тренування</label>
+            <select name="training_id" class="form-control" required>
+                <option value="">Оберіть тренування</option>
+                {{#each trainings}}
+                    <option value="{{training_id}}">{{title}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Рейтинг</label>
+            <input name="rating" type="number" min="1" max="5" class="form-control" placeholder="Оцініть від 1 до 5" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Коментар</label>
+            <input name="comment" class="form-control" placeholder="Напишіть коментар">
+        </div>
+
+        <button type="submit" class="btn btn-success">Додати відгук</button>
+    </form>
+</div>
+
+<div class="card p-4">
+    <h3 class="mb-3" style="margin-top: 0;">Список відгуків</h3>
+
+    <table class="table table-striped table-bordered mb-0">
+        <thead>
         <tr>
-            <td>{{review_id}}</td>
-            <td>{{user_name}}</td>
-            <td>{{training_title}}</td>
-            <td>{{rating}}/5</td>
-            <td>{{comment}}</td>
+            <th>Користувач</th>
+            <th>Тренування</th>
+            <th>Рейтинг</th>
+            <th>Коментар</th>
         </tr>
-    {{/each}}
-    </tbody>
-</table>
-<h3>Залишити відгук</h3>
-<form method="POST" action="/reviews">
-    <select name="user_id" required>
-        <option value="">Оберіть користувача</option>
-        {{#each users}}
-            <option value="{{user_id}}">{{full_name}}</option>
+        </thead>
+        <tbody>
+        {{#each reviews}}
+            <tr>
+                <td>{{user_name}}</td>
+                <td>{{training_title}}</td>
+                <td>{{rating}}/5</td>
+                <td>{{comment}}</td>
+            </tr>
         {{/each}}
-    </select>
-    <select name="training_id" required>
-        <option value="">Оберіть тренування</option>
-        {{#each trainings}}
-            <option value="{{training_id}}">{{title}}</option>
-        {{/each}}
-    </select>
-    <input name="rating" type="number" min="1" max="5" placeholder="Рейтинг (1-5)" required>
-    <input name="comment" placeholder="Коментар">
-    <button type="submit">Додати</button>
-</form>
+        </tbody>
+    </table>
+</div>
